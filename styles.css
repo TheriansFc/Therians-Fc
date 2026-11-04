@@ -181,3 +181,44 @@
     0 12px 35px rgba(0,0,0,.35),
     0 0 25px rgba(244,154,187,.35);
 }
+
+/* THERIANS FC - PARTE SUPERIOR FIFA */
+
+.fifaCard .fifaTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 220px;
+}
+
+.fifaCard .fifaRating {
+  position: relative;
+  flex: 0 0 64px;
+  text-align: center;
+  z-index: 2;
+}
+
+.fifaCard .fifaOverall {
+  font-size: 46px;
+  font-weight: 900;
+  line-height: 1;
+  color: #f49abb;
+}
+
+.fifaCard .fifaPosition {
+  font-size: 12px;
+  font-weight: 800;
+  color: #f49abb;
+  margin-top: 5px;
+}
+
+.fifaCard .playerPhoto {
+  display: block;
+  width: 185px;
+  height: 220px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 14px;
+  flex-shrink: 0;
+}
