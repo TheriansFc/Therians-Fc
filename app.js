@@ -17,7 +17,29 @@ $('fantasyList').innerHTML=[...players].sort((a,b)=>val(b.valor)-val(a.valor)).m
 $('auditList').innerHTML=audits.length?audits.map(a=>`<article><b>${esc(a.accion)} · ${esc(a.tabla)}</b><small>${esc(a.editor||'Sistema')} · ${new Date(a.fecha).toLocaleString('es-MX')}</small></article>`).join(''):'<p class="empty">No hay cambios registrados todavía.</p>';
 $('authBtn').textContent=canEdit()?'Salir':'Ingresar';document.querySelectorAll('.editAction').forEach(b=>b.textContent=canEdit()?'+ '+({noticias:'Publicar noticia',jugadores:'Agregar jugador',partidos:'Registrar partido'}[b.dataset.type]):'🔒 '+({noticias:'Publicar noticia',jugadores:'Agregar jugador',partidos:'Registrar partido'}[b.dataset.type]));
 }
-const definitions={noticias:[['titulo','Título','text',true],['contenido','Contenido','textarea',true],['fecha','Fecha','date',true]],jugadores:[['nombre','Nombre','text',true],['numero','Dorsal','number',true],['posicion','Posición','select',true],['goles','Goles','number',true],['asistencias','Asistencias','number',true],['valor','Valor Fantasy (millones)','number',true]],partidos:[['rival','Rival','text',true],['fecha','Fecha','date',true],['lugar','Lugar','text',false],['goles_favor','Goles de Therians','number',false],['goles_contra','Goles del rival','number',false]]};
+const definitions={
+  noticias:[
+    ['titulo','Título','text',true],
+    ['contenido','Contenido','textarea',true],
+    ['fecha','Fecha','date',true]
+  ],
+  jugadores:[
+    ['nombre','Nombre','text',true],
+    ['numero','Dorsal','number',true],
+    ['posicion','Posición','select',true],
+    ['goles','Goles','number',true],
+    ['asistencias','Asistencias','number',true],
+    ['valor','Valor Fantasy (millones)','number',true],
+    ['foto_url','URL de fotografía','text',false]
+  ],
+  partidos:[
+    ['rival','Rival','text',true],
+    ['fecha','Fecha','date',true],
+    ['lugar','Lugar','text',false],
+    ['goles_favor','Goles de Therians','number',false],
+    ['goles_contra','Goles del rival','number',false]
+  ]
+};
 function openEdit(type,id){if(!online){alert('Primero configura Supabase para habilitar la edición compartida. Consulta README.md.');return}if(!canEdit()){$('authDialog').showModal();return}const item=data[type].find(x=>String(x.id)===String(id))||{};editing={type,id:id||null};$('editTitle').textContent=(id?'Editar ':'Agregar ')+({noticias:'noticia',jugadores:'jugador',partidos:'partido'}[type]);$('fields').innerHTML=definitions[type].map(([key,label,kind,required])=>{const value=item[key]??(kind==='date'?new Date().toISOString().slice(0,10):'');let field=kind==='textarea'?`<textarea name="${key}" ${required?'required':''}>${esc(value)}</textarea>`:kind==='select'?`<select name="${key}">${['Portero','Defensa','Medio','Delantero'].map(v=>`<option ${v===value?'selected':''}>${v}</option>`).join('')}</select>`:`<input name="${key}" type="${kind}" value="${esc(value)}" ${kind==='number'?'step="any" min="0"':''} ${required?'required':''}>`;return `<label>${label}${field}</label>`}).join('');$('editMsg').textContent='';$('editDialog').showModal()}
 async function load(){if(!online){render();return}try{const results=await Promise.all([...tables.map(t=>db.from(t).select('*').order('created_at',{ascending:false})),db.rpc('ver_historial_tafc')]);for(let i=0;i<tables.length;i++){if(results[i].error)throw results[i].error;data[tables[i]]=results[i].data||[]}if(results[3].error)throw results[3].error;audits=results[3].data||[];$('notice').textContent='Datos compartidos en línea. Para editar, inicia sesión con tu correo.'}catch(e){$('notice').textContent='No se pudieron cargar los datos compartidos: '+e.message}render()}
 $('authBtn').onclick=async()=>{if(!online){alert('Primero configura Supabase siguiendo README.md.');return}if(canEdit()){await db.auth.signOut();session=null;render()}else $('authDialog').showModal()};
