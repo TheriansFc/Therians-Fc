@@ -634,3 +634,52 @@
   z-index: 3;
 }
 
+/* THERIANS F.C. - DETALLES CARTA ESPECIAL */
+
+/* Nombre del jugador */
+#playersList .fifaName {
+  font-size: 23px;
+  font-weight: 900;
+  text-align: center;
+  letter-spacing: 0.3px;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+/* Dorsal */
+#playersList .fifaNumber {
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #a9bfd8;
+  margin-bottom: 12px;
+}
+
+/* Estadisticas */
+#playersList .fifaStats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 16px;
+  padding: 20px 12px;
+}
+
+/* Cada estadistica */
+#playersList .fifaStats > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 13px;
+  color: #e8eff8;
+}
+
+/* Numeros de habilidades */
+#playersList .fifaStats b {
+  font-size: 22px;
+  font-weight: 900;
+  color: #f391b5;
+}
+
