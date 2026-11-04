@@ -726,3 +726,13 @@
   border-radius: 6px;
 }
 
+/* THERIANS F.C. - ESCUDO SIN RECUADRO */
+
+#playersList .fifaShield {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
