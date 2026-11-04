@@ -266,3 +266,36 @@
   border-radius: 14px;
   flex-shrink: 0;
 }
+
+/* THERIANS FC - CARTA ESPECIAL FIFA */
+
+.fifaCard {
+  position: relative;
+  overflow: hidden;
+
+  background: linear-gradient(
+    160deg,
+    #354766 0%,
+    #142e49 45%,
+    #061725 100%
+  );
+
+  border: 2px solid #f49abb;
+
+  border-radius:
+    32px 32px 45px 45px;
+
+  box-shadow:
+    0 0 22px rgba(244,154,187,0.18),
+    inset 0 0 30px rgba(244,154,187,0.05);
+
+  transition: transform 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+.fifaCard:hover {
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 0 35px rgba(244,154,187,0.35);
+}
