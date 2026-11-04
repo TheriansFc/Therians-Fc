@@ -21,10 +21,11 @@ $('playersList').innerHTML = players.length
   <span>${esc(x.posicion)}</span>
   
 <img
-  src="./assets/escudo-tafc.jpg"
+  src="https://theriansfc.github.io/Therians-Fc/assets/escudo-tafc.jpg"
   alt="Escudo Therians F.C."
   class="fifaShield"
 >
+
 
 </div>
 
