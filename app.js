@@ -228,7 +228,7 @@ $('editForm').onsubmit=async e=>{
         $('editMsg').textContent='Subiendo fotografía...';
 
         const {error:uploadError}=await db.storage
-          .from('JUGADORES')
+          .from('Jugadores')
           .upload(fileName,file,{
             contentType:file.type,
             upsert:false
@@ -237,7 +237,7 @@ $('editForm').onsubmit=async e=>{
         if(uploadError)throw uploadError;
 
         const {data:urlData}=db.storage
-          .from('JUGADORES')
+          .from('Jugadores')
           .getPublicUrl(fileName);
 
         record.foto_url=urlData.publicUrl;
