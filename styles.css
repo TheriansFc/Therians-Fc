@@ -472,6 +472,52 @@
   min-height: 230px;
 }
 
+/* THERIANS F.C. - DISTRIBUCION FIFA */
+
+/* Parte superior de la tarjeta */
+#playersList .fifaTop {
+  position: relative;
+  width: 100%;
+  min-height: 230px;
+}
+
+/* Media, posicion y escudo */
+#playersList .fifaRating {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70px;
+  gap: 3px;
+}
+
+/* Media general */
+#playersList .fifaRating strong {
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 1;
+  color: #f391b5;
+}
+
+/* Posicion */
+#playersList .fifaRating span {
+  font-size: 13px;
+  font-weight: 800;
+  color: #f391b5;
+  text-align: center;
+}
+
+/* Escudo del equipo */
+#playersList .fifaShield {
+  display: block;
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  margin: 12px auto 0;
+  border-radius: 6px;
+}
+
 .fifaRating {
   position: relative;
   z-index: 3;
