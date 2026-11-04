@@ -738,9 +738,17 @@
 
 /* THERIANS F.C. - ESCUDO MAS GRANDE */
 
+
+/* THERIANS F.C. - ESCUDO MAS VISIBLE */
+
 #playersList .fifaShield {
-  width: 65px !important;
-  height: 65px !important;
+  width: 100px !important;
+  height: 100px !important;
   object-fit: contain;
+  margin-top: 8px !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
+
 
