@@ -414,7 +414,7 @@
   border-radius: 50%;
   box-shadow: 0 0 30px rgba(255, 143, 190, 0.08);
   pointer-events: none;
-  z-index: -1;
+  z-index: 0;
 }
 
 .fifaCard::after {
@@ -427,6 +427,13 @@
   border: 1px solid rgba(145, 200, 255, 0.18);
   transform: rotate(45deg);
   pointer-events: none;
-  z-index: -1;
+  z-index: 0;
+}
+
+/* Mantener el contenido por encima de los adornos */
+
+.fifaCard > * {
+  position: relative;
+  z-index: 1;
 }
 
