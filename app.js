@@ -10,7 +10,25 @@ function render(){const players=data.jugadores, matches=data.partidos, played=ma
 $('metrics').innerHTML=[['Jugadores',players.length],['Partidos',played.length],['Victorias',wins],['Goles',played.reduce((s,m)=>s+val(m.goles_favor),0)]].map(([l,n])=>`<div class="metric"><strong>${n}</strong><span>${l}</span></div>`).join('');
 const edit=(t,id)=>canEdit()?`<button class="edit" data-edit="${t}" data-id="${esc(id)}">Editar ↗</button>`:'';
 $('newsList').innerHTML=data.noticias.length?data.noticias.map(x=>`<article class="card"><span class="tag">${date(x.fecha)}</span><h3>${esc(x.titulo)}</h3><p>${esc(x.contenido)}</p>${edit('noticias',x.id)}</article>`).join(''):'<p class="empty">Todavía no hay noticias.</p>';
-$('playersList').innerHTML=players.length?players.map(x=>`<article class="card"><div class="playerNumber">${esc(x.numero??'—')}</div><h3>${esc(x.nombre)}</h3><span class="tag">${esc(x.posicion)}</span><p>⚽ ${val(x.goles)} goles · 🎯 ${val(x.asistencias)} asistencias</p>${edit('jugadores',x.id)}</article>`).join(''):'<p class="empty">La plantilla está vacía.</p>';
+$('playersList').innerHTML=players.length?players.map(x=>`
+  <article class="card">
+    ${x.foto_url
+      ? `<img
+          src="${esc(x.foto_url)}"
+          alt="Fotografía de ${esc(x.nombre)}"
+          class="playerPhoto"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        >`
+      : `<div class="playerPhotoPlaceholder">⚽</div>`
+    }
+    <div class="playerNumber">${esc(x.numero??'—')}</div>
+    <h3>${esc(x.nombre)}</h3>
+    <span class="tag">${esc(x.posicion)}</span>
+    <p>⚽ ${val(x.goles)} goles · 🎯 ${val(x.asistencias)} asistencias</p>
+    ${edit('jugadores',x.id)}
+  </article>
+`).join(''):'<p class="empty">La plantilla está vacía.</p>';
 $('matchesList').innerHTML=matches.length?matches.map(x=>`<article class="card"><span class="tag">${date(x.fecha)}</span><h3>Therians F.C. vs ${esc(x.rival)}</h3><div class="value">${x.goles_favor==null?'—':val(x.goles_favor)} : ${x.goles_contra==null?'—':val(x.goles_contra)}</div><p>${esc(x.lugar||'Sede por confirmar')}</p>${edit('partidos',x.id)}</article>`).join(''):'<p class="empty">No hay partidos registrados. Agrega el primero cuando esté confirmado.</p>';
 const sorted=[...players].sort((a,b)=>val(b.goles)-val(a.goles));$('statsList').innerHTML=sorted.length?sorted.map(x=>`<article class="card"><span class="tag">#${esc(x.numero)} · ${esc(x.posicion)}</span><h3>${esc(x.nombre)}</h3><p>⚽ ${val(x.goles)} goles · 🎯 ${val(x.asistencias)} asistencias</p></article>`).join(''):'<p class="empty">Sin estadísticas.</p>';
 $('fantasyList').innerHTML=[...players].sort((a,b)=>val(b.valor)-val(a.valor)).map(x=>`<article class="card"><span class="tag">VALOR FICTICIO</span><h3>${esc(x.nombre)}</h3><div class="value">$${val(x.valor).toFixed(1)} M</div><p>${esc(x.posicion)} · #${esc(x.numero)}</p>${edit('jugadores',x.id)}</article>`).join('')||'<p class="empty">Sin valores todavía.</p>';
