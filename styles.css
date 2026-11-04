@@ -501,3 +501,41 @@
   margin-top: 10px;
 }
 
+/* THERIANS F.C. - ACABADO PREMIUM FIFA */
+
+#playersList .fifaCard {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #f18eb5;
+  border-radius: 32px;
+
+  background:
+    radial-gradient(
+      circle at 75% 25%,
+      rgba(241, 142, 181, 0.16),
+      transparent 55%
+    ),
+    linear-gradient(
+      160deg,
+      #344563 0%,
+      #19324e 55%,
+      #071827 100%
+    );
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.28),
+    0 0 20px rgba(241, 142, 181, 0.08);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+#playersList .fifaCard:hover {
+  transform: translateY(-6px);
+
+  box-shadow:
+    0 18px 38px rgba(0, 0, 0, 0.35),
+    0 0 24px rgba(241, 142, 181, 0.2);
+}
+
