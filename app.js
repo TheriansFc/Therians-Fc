@@ -139,7 +139,11 @@ function openEdit(type,id){
           name="${key}"
           type="${kind}"
           value="${esc(value)}"
-          ${kind==='number'?'step="any" min="0"':''}
+          ${kind==='number'
+  ? (['velocidad','tiro','pase','regate','defensa','fisico'].includes(key)
+      ? 'step="1" min="0" max="99"'
+      : 'step="any" min="0"')
+  : ''}
           ${required?'required':''}
         >`;
       }
