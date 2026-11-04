@@ -222,3 +222,47 @@
   border-radius: 14px;
   flex-shrink: 0;
 }
+
+/* THERIANS FC - AJUSTE SUPERIOR FIFA */
+
+.fifaCard .fifaTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 220px;
+}
+
+.fifaCard .fifaRating {
+  position: relative;
+  flex: 0 0 65px;
+  text-align: center;
+  padding-top: 12px;
+  z-index: 2;
+}
+
+.fifaCard .fifaRating strong {
+  display: block;
+  font-size: 46px;
+  font-weight: 900;
+  line-height: 1;
+  color: #f49abb;
+}
+
+.fifaCard .fifaRating span {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  color: #f49abb;
+  margin-top: 6px;
+}
+
+.fifaCard .fifaPhoto {
+  display: block;
+  width: 185px;
+  height: 220px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 14px;
+  flex-shrink: 0;
+}
