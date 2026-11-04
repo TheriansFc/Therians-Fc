@@ -15,18 +15,17 @@ $('playersList').innerHTML = players.length
   ? players.map(x => `
     <article class="card fifaCard">
 
-      <div class="fifaTop">
-        <div class="fifaRating">
-          <strong>${esc(x.media_general ?? 50)}</strong>
-          <span>${esc(x.posicion)}</span>
-          
-<img
-  src="assets/escudo.png"
-  alt="Escudo Therians F.C."
-  class="fifaShield"
->
+   
+<div class="fifaRating">
+  <strong>${esc(x.media_general ?? 50)}</strong>
+  <span>${esc(x.posicion)}</span>
+  <img
+    src="assets/escudo-tafc.jpg"
+    alt="Escudo Therians F.C."
+    class="fifaShield"
+  >
+</div>
 
-        </div>
 
         ${x.foto_url
           ? `<img
