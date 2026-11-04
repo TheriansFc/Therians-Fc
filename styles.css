@@ -299,3 +299,35 @@
   box-shadow:
     0 0 35px rgba(244,154,187,0.35);
 }
+
+/* FOTO DE JUGADOR - ESTILO FIFA */
+
+.fifaTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 230px;
+}
+
+.fifaRating {
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.fifaPhoto {
+  display: block;
+  width: 175px;
+  height: 225px;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 14px;
+  margin: 0 auto;
+  mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 75%,
+    transparent 100%
+  );
+}
