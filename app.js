@@ -58,7 +58,118 @@ const definitions={
     ['goles_contra','Goles del rival','number',false]
   ]
 };
-function openEdit(type,id){if(!online){alert('Primero configura Supabase para habilitar la edición compartida. Consulta README.md.');return}if(!canEdit()){$('authDialog').showModal();return}const item=data[type].find(x=>String(x.id)===String(id))||{};editing={type,id:id||null};$('editTitle').textContent=(id?'Editar ':'Agregar ')+({noticias:'noticia',jugadores:'jugador',partidos:'partido'}[type]);$('fields').innerHTML=definitions[type].map(([key,label,kind,required])=>{const value=item[key]??(kind==='date'?new Date().toISOString().slice(0,10):'');let field=kind==='textarea'?`<textarea name="${key}" ${required?'required':''}>${esc(value)}</textarea>`:kind==='select'?`<select name="${key}">${['Portero','Defensa','Medio','Delantero'].map(v=>`<option ${v===value?'selected':''}>${v}</option>`).join('')}</select>`:`<input name="${key}" type="${kind}" value="${esc(value)}" ${kind==='number'?'step="any" min="0"':''} ${required?'required':''}>`;return `<label>${label}${field}</label>`}).join('');$('editMsg').textContent='';$('editDialog').showModal()}
+function openEdit(type,id){
+  if(!online){
+    alert('Primero configura Supabase.');
+    return;
+  }
+
+  if(!canEdit()){
+    $('authDialog').showModal();
+    return;
+  }
+
+  const item=data[type].find(
+    x=>String(x.id)===String(id)
+  )||{};
+
+  editing={type,id:id||null};
+
+  $('editTitle').textContent=
+    (id?'Editar ':'Agregar ')+
+    ({
+      noticias:'noticia',
+      jugadores:'jugador',
+      partidos:'partido'
+    }[type]);
+
+  $('fields').innerHTML=definitions[type]
+    .map(([key,label,kind,required])=>{
+
+      const value=item[key]??(
+        kind==='date'
+          ?new Date().toISOString().slice(0,10)
+          :''
+      );
+
+      let field;
+
+      if(key==='foto_url' && type==='jugadores'){
+        field=`
+          <input
+            type="file"
+            id="playerPhotoFile"
+            accept="image/jpeg,image/png,image/webp"
+          >
+          <input
+            type="hidden"
+            name="foto_url"
+            value="${esc(value)}"
+          >
+          <img
+            id="playerPhotoPreview"
+            src="${esc(value)}"
+            style="
+              display:${value?'block':'none'};
+              width:130px;
+              height:150px;
+              object-fit:cover;
+              border-radius:12px;
+              margin-top:10px;
+            "
+          >
+        `;
+      }else if(kind==='textarea'){
+        field=`<textarea name="${key}"
+          ${required?'required':''}>${esc(value)}</textarea>`;
+      }else if(kind==='select'){
+        field=`<select name="${key}">
+          ${['Portero','Defensa','Medio','Delantero']
+            .map(v=>`<option ${v===value?'selected':''}>${v}</option>`)
+            .join('')}
+        </select>`;
+      }else{
+        field=`<input
+          name="${key}"
+          type="${kind}"
+          value="${esc(value)}"
+          ${kind==='number'?'step="any" min="0"':''}
+          ${required?'required':''}
+        >`;
+      }
+
+      return `<label>${label}${field}</label>`;
+    }).join('');
+
+  if(type==='jugadores'){
+    const photoInput=$('playerPhotoFile');
+    const preview=$('playerPhotoPreview');
+
+    photoInput.addEventListener('change',()=>{
+      const file=photoInput.files[0];
+      if(!file)return;
+
+      if(!['image/jpeg','image/png','image/webp']
+        .includes(file.type)){
+        alert('Selecciona una imagen JPG, PNG o WebP.');
+        photoInput.value='';
+        return;
+      }
+
+      if(file.size>5*1024*1024){
+        alert('La fotografía debe pesar menos de 5 MB.');
+        photoInput.value='';
+        return;
+      }
+
+      preview.src=URL.createObjectURL(file);
+      preview.style.display='block';
+    });
+  }
+
+  $('editMsg').textContent='';
+  $('editDialog').showModal();
+}
 async function load(){if(!online){render();return}try{const results=await Promise.all([...tables.map(t=>db.from(t).select('*').order('created_at',{ascending:false})),db.rpc('ver_historial_tafc')]);for(let i=0;i<tables.length;i++){if(results[i].error)throw results[i].error;data[tables[i]]=results[i].data||[]}if(results[3].error)throw results[3].error;audits=results[3].data||[];$('notice').textContent='Datos compartidos en línea. Para editar, inicia sesión con tu correo.'}catch(e){$('notice').textContent='No se pudieron cargar los datos compartidos: '+e.message}render()}
 $('authBtn').onclick=async()=>{if(!online){alert('Primero configura Supabase siguiendo README.md.');return}if(canEdit()){await db.auth.signOut();session=null;render()}else $('authDialog').showModal()};
 $('authForm').onsubmit=async e=>{e.preventDefault();if(!online)return;const email=$('email').value.trim();$('authMsg').textContent='Enviando...';const {error}=await db.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+location.pathname}});$('authMsg').textContent=error?error.message:'Revisa tu correo para abrir el enlace de acceso.'};
