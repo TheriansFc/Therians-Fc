@@ -19,6 +19,13 @@ $('playersList').innerHTML = players.length
         <div class="fifaRating">
           <strong>${esc(x.media_general ?? 50)}</strong>
           <span>${esc(x.posicion)}</span>
+          
+<img
+  src="assets/escudo.png"
+  alt="Escudo Therians F.C."
+  class="fifaShield"
+>
+
         </div>
 
         ${x.foto_url
