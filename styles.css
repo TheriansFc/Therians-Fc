@@ -89,3 +89,31 @@
   #playersList {grid-template-columns:minmax(0,1fr)}
   #playersList .fifaCard {width:100%}
 }
+
+/* THERIANS F.C. - FOTOGRAFIAS UNIFORMES */
+
+#playersList .fifaPhoto {
+  width: 175px;
+  height: 205px;
+  max-width: 100%;
+
+  object-fit: contain;
+  object-position: center bottom;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 82%,
+    transparent 100%
+  );
+
+  mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 82%,
+    transparent 100%
+  );
+}
