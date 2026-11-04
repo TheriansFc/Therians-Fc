@@ -751,4 +751,57 @@
   box-shadow: none !important;
 }
 
+/* THERIANS F.C. - TARJETAS COMPACTAS */
+
+#playersList {
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(0, 260px)
+  ) !important;
+  gap: 24px !important;
+}
+
+#playersList .fifaCard {
+  width: 260px !important;
+  max-width: 100% !important;
+  min-height: 0 !important;
+}
+
+/* Reducir espacio superior */
+#playersList .fifaTop {
+  min-height: 155px !important;
+}
+
+/* Media general */
+#playersList .fifaRating strong {
+  font-size: 45px !important;
+}
+
+/* Escudo */
+#playersList .fifaShield {
+  width: 75px !important;
+  height: 75px !important;
+}
+
+/* Fotografia */
+#playersList .fifaPhoto {
+  width: 165px !important;
+  height: 195px !important;
+}
+
+/* Nombre del jugador */
+#playersList .fifaName {
+  font-size: 18px !important;
+}
+
+/* Ajuste para celulares */
+@media (max-width: 380px) {
+  #playersList {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  #playersList .fifaCard {
+    width: 100% !important;
+  }
+}
 
