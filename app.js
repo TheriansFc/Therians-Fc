@@ -15,7 +15,7 @@ $('playersList').innerHTML = players.length
   ? players.map(x => `
     <article class="card fifaCard">
 
-   
+<div class="fifaTop">  
 <div class="fifaRating">
   <strong>${esc(x.media_general ?? 50)}</strong>
   <span>${esc(x.posicion)}</span>
@@ -28,7 +28,7 @@ $('playersList').innerHTML = players.length
 
 
 </div>
-
+</div>
 
         ${x.foto_url
           ? `<img
