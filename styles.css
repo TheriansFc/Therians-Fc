@@ -585,3 +585,52 @@
     0 0 24px rgba(241, 142, 181, 0.2);
 }
 
+/* THERIANS F.C. - CARTA ESPECIAL */
+
+/* Iluminacion detras del jugador */
+#playersList .fifaTop {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Resplandor rosa y azul */
+#playersList .fifaTop::before {
+  content: "";
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  top: 45px;
+  right: -35px;
+
+  background: radial-gradient(
+    circle,
+    rgba(243, 145, 181, 0.24) 0%,
+    rgba(75, 105, 165, 0.12) 45%,
+    transparent 72%
+  );
+
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Fotografia protagonista */
+#playersList .fifaPhoto {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(
+    0 8px 12px rgba(0, 0, 0, 0.18)
+  );
+}
+
+/* Media y escudo por encima del fondo */
+#playersList .fifaRating {
+  position: relative;
+  z-index: 3;
+}
+
+#playersList .fifaShield {
+  position: relative;
+  z-index: 3;
+}
+
