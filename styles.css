@@ -805,3 +805,80 @@
   }
 }
 
+/* THERIANS F.C. - CARTAS FIFA COMPACTAS */
+
+#playersList {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, 240px) !important;
+  gap: 24px !important;
+  justify-content: start !important;
+}
+
+#playersList .fifaCard {
+  width: 240px !important;
+  min-width: 0 !important;
+  max-width: 240px !important;
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 16px !important;
+  box-sizing: border-box !important;
+  overflow: hidden;
+}
+
+/* Zona superior mas compacta */
+#playersList .fifaTop {
+  min-height: 125px !important;
+  height: 125px !important;
+}
+
+/* Media general */
+#playersList .fifaRating strong {
+  font-size: 42px !important;
+}
+
+/* Escudo */
+#playersList .fifaShield {
+  width: 65px !important;
+  height: 65px !important;
+  margin-top: 5px !important;
+}
+
+/* Fotografia del jugador */
+#playersList .fifaPhoto {
+  width: 150px !important;
+  height: 160px !important;
+  margin: -15px 0 0 auto !important;
+  object-fit: contain !important;
+  object-position: center bottom !important;
+}
+
+/* Nombre */
+#playersList .fifaName {
+  font-size: 17px !important;
+  margin-top: 4px !important;
+  margin-bottom: 5px !important;
+}
+
+/* Dorsal */
+#playersList .fifaNumber {
+  margin: 4px 0 10px !important;
+}
+
+/* Estadisticas: conservar estilo */
+#playersList .fifaStats {
+  margin-top: 8px !important;
+  margin-bottom: 10px !important;
+}
+
+/* Celulares */
+@media (max-width: 280px) {
+  #playersList {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  #playersList .fifaCard {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
