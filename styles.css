@@ -736,3 +736,11 @@
   padding: 0 !important;
 }
 
+/* THERIANS F.C. - ESCUDO MAS GRANDE */
+
+#playersList .fifaShield {
+  width: 65px !important;
+  height: 65px !important;
+  object-fit: contain;
+}
+
