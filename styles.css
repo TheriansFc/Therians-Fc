@@ -464,3 +464,40 @@
   }
 }
 
+/* THERIANS F.C. - DISTRIBUCIÓN ESTILO FIFA */
+
+.fifaTop {
+  position: relative;
+  width: 100%;
+  min-height: 230px;
+}
+
+.fifaRating {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.fifaRating strong {
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 1;
+  color: #f391b5;
+}
+
+.fifaRating span {
+  font-size: 13px;
+  font-weight: 800;
+  color: #f391b5;
+}
+
+.fifaShield {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  margin-top: 10px;
+}
+
