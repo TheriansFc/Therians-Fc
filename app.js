@@ -21,7 +21,7 @@ $('playersList').innerHTML = players.length
   <span>${esc(x.posicion)}</span>
   
 <img
-  src="https://theriansfc.github.io/Therians-Fc/assets/escudo-tafc.jpg"
+  src="https://theriansfc.github.io/Therians-Fc/assets/Emblema%20TAFC%202026%20con%20lobos%20y%20cerezos.png"
   alt="Escudo Therians F.C."
   class="fifaShield"
 >
