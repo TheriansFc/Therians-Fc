@@ -302,13 +302,17 @@
 
 /* FOTO DE JUGADOR - ESTILO FIFA */
 
+
 .fifaTop {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
+  justify-content: flex-start;
+  gap: 8px;
   min-height: 230px;
+  padding: 0 12px 0 0;
+  box-sizing: border-box;
 }
+
 
 .fifaRating {
   flex-shrink: 0;
