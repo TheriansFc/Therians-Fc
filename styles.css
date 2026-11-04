@@ -335,15 +335,19 @@
 
 .fifaPhoto {
   display: block;
-  width: 175px;
-  height: 230px;
-  max-width: 100%;
+  width: 205px;
+  height: 245px;
+  max-width: none;
   object-fit: contain;
-  object-position: center top;
-  margin: 0;
+  object-position: center bottom;
   border-radius: 0;
-  mask-image: none;
-  -webkit-mask-image: none;
+  margin: 0 0 0 auto;
+  mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 75%,
+    transparent 100%
+  );
 }
 
 
