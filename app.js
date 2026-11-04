@@ -48,6 +48,12 @@ const definitions={
     ['goles','Goles','number',true],
     ['asistencias','Asistencias','number',true],
     ['valor','Valor Fantasy (millones)','number',true],
+    ['velocidad','Velocidad','number',true],
+['tiro','Tiro','number',true],
+['pase','Pase','number',true],
+['regate','Regate','number',true],
+['defensa','Defensa','number',true],
+['fisico','Físico','number',true],
     ['foto_url','URL de fotografía','text',false]
   ],
   partidos:[
