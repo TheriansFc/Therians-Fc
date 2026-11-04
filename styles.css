@@ -437,3 +437,30 @@
   z-index: 1;
 }
 
+/* DISTRIBUCIÓN DE TARJETAS FIFA */
+
+#playersList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 322px);
+  gap: 40px;
+  justify-content: start;
+  align-items: start;
+}
+
+#playersList .fifaCard {
+  width: 322px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 380px) {
+  #playersList {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  #playersList .fifaCard {
+    width: 100%;
+  }
+}
+
