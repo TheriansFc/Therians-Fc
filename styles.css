@@ -132,3 +132,54 @@
   border-radius: 0 !important;
   box-shadow: none !important;
 }
+
+/* GALERÍA THERIANS F.C. */
+
+.galeriaFiltros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.galeriaFiltro {
+  background: #102940;
+  color: #f4f7fb;
+  border: 1px solid #f3a1b8;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.galeriaFiltro:hover {
+  background: #f3a1b8;
+  color: #081e33;
+  transform: translateY(-2px);
+}
+
+.galeriaFiltro.activo {
+  background: #f3a1b8;
+  color: #081e33;
+}
+
+.galeriaGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.galeriaGrid .empty {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 700px) {
+  .galeriaGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .galeriaFiltro {
+    padding: 9px 14px;
+  }
+}
