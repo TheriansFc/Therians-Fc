@@ -21,10 +21,21 @@ $('galeriaList').innerHTML = galeria.length
                loading="lazy">`
         }
 
-       
-<div class="galeriaInfo">
+       <div class="galeriaInfo">
   <h3>${esc(item.titulo || 'Momento TAFC')}</h3>
   <p>${esc(item.descripcion || '')}</p>
+
+  ${canEdit() ? `
+    <div class="galeriaActions">
+      <button
+        type="button"
+        class="editAction"
+        data-edit="galeria"
+        data-id="${esc(item.id)}">
+        ✏️ Editar publicación
+      </button>
+    </div>
+  ` : ''}
 </div>
 
       </article>
