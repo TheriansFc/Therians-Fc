@@ -2,7 +2,7 @@
 const conf=window.TAFC_CONFIG||{}, online=Boolean(conf.supabaseUrl&&conf.supabaseAnonKey&&window.supabase);
 const db=online?window.supabase.createClient(conf.supabaseUrl,conf.supabaseAnonKey):null;
 const sample={noticias:[{id:'demo-n1',titulo:'Bienvenidos a Therians F.C.',contenido:'Este es el nuevo hogar digital del equipo. Próximamente publicaremos noticias y actualizaciones reales.',fecha:'2026-11-03'}],jugadores:[{id:'demo-j1',nombre:'Jugador de ejemplo',numero:7,posicion:'Delantero',goles:0,asistencias:0,valor:8.5}],partidos:[]};
-const tables=['noticias','jugadores','partidos'];let data=structuredClone(sample),audits=[],session=null,editing=null;
+const tables=['noticias','jugadores','partidos','galeria'];let data=structuredClone(sample),audits=[],session=null,editing=null;
 const $=id=>document.getElementById(id), esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const val=n=>Number(n||0),date=s=>s?new Date(s+'T12:00:00').toLocaleDateString('es-MX',{year:'numeric',month:'short',day:'numeric'}):'Sin fecha';
 function canEdit(){return Boolean(session?.user)}
@@ -225,7 +225,7 @@ function openEdit(type,id){
   $('editMsg').textContent='';
   $('editDialog').showModal();
 }
-async function load(){if(!online){render();return}try{const results=await Promise.all([...tables.map(t=>db.from(t).select('*').order('created_at',{ascending:false})),db.rpc('ver_historial_tafc')]);for(let i=0;i<tables.length;i++){if(results[i].error)throw results[i].error;data[tables[i]]=results[i].data||[]}if(results[3].error)throw results[3].error;audits=results[3].data||[];$('notice').textContent='Datos compartidos en línea. Para editar, inicia sesión con tu correo.'}catch(e){$('notice').textContent='No se pudieron cargar los datos compartidos: '+e.message}render()}
+async function load(){if(!online){render();return}try{const results=await Promise.all([...tables.map(t=>db.from(t).select('*').order('created_at',{ascending:false})),db.rpc('ver_historial_tafc')]);for(let i=0;i<tables.length;i++){if(results[i].error)throw results[i].error;data[tables[i]]=results[i].data||[]}if(results[4].error)throw results[4].error;audits=results[4].data||[];$('notice').textContent='Datos compartidos en línea. Para editar, inicia sesión con tu correo.'}catch(e){$('notice').textContent='No se pudieron cargar los datos compartidos: '+e.message}render()}
 $('authBtn').onclick=async()=>{if(!online){alert('Primero configura Supabase siguiendo README.md.');return}if(canEdit()){await db.auth.signOut();session=null;render()}else $('authDialog').showModal()};
 $('authForm').onsubmit=async e=>{e.preventDefault();if(!online)return;const email=$('email').value.trim();$('authMsg').textContent='Enviando...';const {error}=await db.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+location.pathname}});$('authMsg').textContent=error?error.message:'Revisa tu correo para abrir el enlace de acceso.'};
 $('editForm').onsubmit=async e=>{
