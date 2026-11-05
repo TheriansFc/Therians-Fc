@@ -503,5 +503,55 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     visorGaleria.classList.remove('activo');
   }
-});  
+});
+// ELIMINAR PUBLICACIONES DE GALERÍA - TAFC
+
+document.addEventListener('click', async (e) => {
+  const boton = e.target.closest('[data-delete-galeria]');
+  if (!boton) return;
+
+  if (!db || !session?.user) {
+    alert('Debes iniciar sesión.');
+    return;
+  }
+
+  const id = boton.dataset.deleteGaleria;
+
+  const confirmar = confirm(
+    '¿Seguro que deseas eliminar esta publicación?\n\n' +
+    'Esta acción no se puede deshacer.'
+  );
+
+  if (!confirmar) return;
+
+  boton.disabled = true;
+  boton.textContent = 'Eliminando...';
+
+  try {
+    const { data: eliminadas, error } = await db
+      .from('galeria')
+      .delete()
+      .eq('id', id)
+      .select('id');
+
+    if (error) throw error;
+
+    if (!eliminadas || eliminadas.length === 0) {
+      alert('No se eliminó la publicación. Verifica tus permisos de administrador.');
+      return;
+    }
+
+    alert('Publicación eliminada correctamente.');
+
+    await load();
+
+  } catch (error) {
+    console.error('Error al eliminar publicación:', error);
+    alert('No se pudo eliminar: ' + error.message);
+
+  } finally {
+    boton.disabled = false;
+    boton.textContent = '🗑️ Eliminar publicación';
+  }
+});      
 })();
