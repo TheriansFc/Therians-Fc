@@ -349,4 +349,16 @@ $('editForm').onsubmit=async e=>{
 };
 document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>b.closest('dialog').close());document.querySelectorAll('.editAction').forEach(b=>b.onclick=()=>openEdit(b.dataset.type));document.body.addEventListener('click',e=>{const b=e.target.closest('[data-edit]');if(b)openEdit(b.dataset.edit,b.dataset.id)});
 if(online){db.auth.getSession().then(({data:s})=>{session=s.session;render()});db.auth.onAuthStateChange((_event,s)=>{session=s;render()})}load();
+const galeriaPublicarBtn = document.getElementById('galeriaPublicarBtn');
+
+if (galeriaPublicarBtn) {
+  galeriaPublicarBtn.addEventListener('click', () => {
+    if (!canEdit()) {
+      alert('Debes iniciar sesión para publicar en la galería.');
+      return;
+    }
+
+    alert('¡Perfecto! Ya podemos comenzar a crear el formulario de publicación.');
+  });
+}      
 })();
