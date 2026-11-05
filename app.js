@@ -441,5 +441,39 @@ if (galeriaPublicarBtn) {
     document.getElementById('galeriaDialog').showModal();
   });
 }
-   
+ // VISOR DE FOTOGRAFÍAS - THERIANS F.C.
+
+const visorGaleria = document.createElement('div');
+visorGaleria.className = 'visorGaleria';
+
+visorGaleria.innerHTML = `
+  <button class="cerrarVisor" type="button">✕</button>
+  <img src="" alt="Fotografía ampliada">
+`;
+
+document.body.appendChild(visorGaleria);
+
+document.addEventListener('click', (e) => {
+  const foto = e.target.closest('.galeriaFotoAmpliable');
+
+  if (foto) {
+    visorGaleria.querySelector('img').src = foto.src;
+    visorGaleria.querySelector('img').alt = foto.alt;
+    visorGaleria.classList.add('activo');
+    return;
+  }
+
+  if (
+    e.target === visorGaleria ||
+    e.target.closest('.cerrarVisor')
+  ) {
+    visorGaleria.classList.remove('activo');
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    visorGaleria.classList.remove('activo');
+  }
+});  
 })();
