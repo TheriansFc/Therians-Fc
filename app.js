@@ -29,7 +29,7 @@ $('galeriaList').innerHTML = galeria.length
     <div class="galeriaActions">
       <button
         type="button"
-        class="editAction"
+        class="galeriaEditarBtn"
         data-edit="galeria"
         data-id="${esc(item.id)}">
         ✏️ Editar publicación
