@@ -12,7 +12,19 @@ const edit=(t,id)=>canEdit()?`<button class="edit" data-edit="${t}" data-id="${e
 $('newsList').innerHTML=data.noticias.length?data.noticias.map(x=>`<article class="card"><span class="tag">${date(x.fecha)}</span><h3>${esc(x.titulo)}</h3><p>${esc(x.contenido)}</p>${edit('noticias',x.id)}</article>`).join(''):'<p class="empty">Todavía no hay noticias.</p>';
 
 $('playersList').innerHTML = players.length
-  ? players.map(x => `
+  ? [...players].sort((a, b) => {
+  const orden = {
+    DELANTERO: 1,
+    MEDIO: 2,
+    DEFENSA: 3,
+    PORTERO: 4
+  };
+
+  const posicionA = String(a.posicion || "").trim().toUpperCase();
+  const posicionB = String(b.posicion || "").trim().toUpperCase();
+
+  return (orden[posicionA] ?? 99) - (orden[posicionB] ?? 99);
+}).map(x => `
     <article class="card fifaCard">
 
 <div class="fifaTop">  
