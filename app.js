@@ -175,13 +175,13 @@ function openEdit(type,id){
   editing={type,id:id||null};
 
   $('editTitle').textContent=
-    (id?'Editar ':'Agregar ')+
-    ({
-      noticias:'noticia',
-      jugadores:'jugador',
-      partidos:'partido'
-      galeria:'publicación de galería'
-    }[type]);
+  (id ? 'Editar ' : 'Agregar ') +
+  ({
+    noticias: 'noticia',
+    jugadores: 'jugador',
+    partidos: 'partido',
+    galeria: 'publicación de galería'
+  }[type]);
 
   $('fields').innerHTML=definitions[type]
     .map(([key,label,kind,required])=>{
