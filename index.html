@@ -50,4 +50,63 @@
 <footer><img src="assets/escudo-tafc.jpg" alt="TAFC"><div><b>THERIANS F.C.</b><p>Unidos por el fútbol 7 · 2026</p></div><span>Hecho para la comunidad TAFC</span></footer>
 <dialog id="authDialog"><form id="authForm" class="modal"><button type="button" class="close" data-close>✕</button><span class="eyebrow">CUENTA TAFC</span><h2>Entrar o registrarse</h2><p class="muted">Introduce tu correo para recibir un enlace de acceso. No necesitas contraseña.</p><label>Correo electrónico<input id="email" type="email" required placeholder="tu@correo.com"></label><button class="btn" type="submit">Enviar enlace de acceso</button><p id="authMsg" class="muted"></p></form></dialog>
 <dialog id="editDialog"><form id="editForm" class="modal"><button type="button" class="close" data-close>✕</button><span class="eyebrow">EDITOR COLABORATIVO</span><h2 id="editTitle">Editar</h2><div id="fields"></div><button class="btn" type="submit">Guardar cambios</button><p id="editMsg" class="muted"></p></form></dialog>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script><script src="config.js"></script><script src="app.js"></script></body></html>
+
+<!-- FORMULARIO PARA PUBLICAR EN GALERÍA -->
+<dialog id="galeriaDialog">
+  <form id="galeriaForm" class="modal">
+    <button type="button" class="close" data-close>✕</button>
+
+    <span class="eyebrow">GALERÍA THERIANS F.C.</span>
+    <h2>Publicar en galería 📸</h2>
+
+    <p class="muted">
+      Comparte fotografías, videos y memes del equipo.
+    </p>
+
+    <label>
+      Tipo de publicación
+      <select id="galeriaTipo" name="tipo" required>
+        <option value="fotos">📸 Fotografía</option>
+        <option value="videos">🎬 Video</option>
+        <option value="memes">😂 Meme</option>
+      </select>
+    </label>
+
+    <label>
+      Título
+      <input
+        type="text"
+        name="titulo"
+        placeholder="Ej. Victoria contra Roma FC"
+        required
+      >
+    </label>
+
+    <label>
+      Descripción
+      <textarea
+        name="descripcion"
+        placeholder="Cuenta qué pasó en este momento..."
+        rows="3"
+      ></textarea>
+    </label>
+
+    <label>
+      Seleccionar archivo
+      <input
+        id="galeriaArchivo"
+        type="file"
+        accept="image/*,video/mp4,video/webm"
+        required
+      >
+    </label>
+
+    <button class="btn" type="submit">
+      Publicar en galería
+    </button>
+
+    <p id="galeriaMsg" class="muted"></p>
+  </form>
+</dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script><script src="config.js"></script><script src="app.js"></script></body></html>
