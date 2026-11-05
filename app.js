@@ -17,6 +17,7 @@ $('galeriaList').innerHTML = galeria.length
                src="${esc(item.archivo_url || '')}"></video>`
           : `<img src="${esc(item.archivo_url || '')}"
                alt="${esc(item.titulo || 'Galería TAFC')}"
+               class="galeriaFotoAmpliable"
                loading="lazy">`
         }
 
