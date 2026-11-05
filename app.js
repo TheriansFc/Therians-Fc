@@ -25,9 +25,6 @@ $('galeriaList').innerHTML = galeria.length
 <div class="galeriaInfo">
   <h3>${esc(item.titulo || 'Momento TAFC')}</h3>
   <p>${esc(item.descripcion || '')}</p>
-  <div class="galeriaActions">
-    ${edit('galeria', item.id)}
-  </div>
 </div>
 
       </article>
