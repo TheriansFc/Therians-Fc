@@ -26,15 +26,22 @@ $('galeriaList').innerHTML = galeria.length
   <p>${esc(item.descripcion || '')}</p>
 
   ${canEdit() ? `
-    <div class="galeriaActions">
-      <button
-        type="button"
-        class="galeriaEditarBtn"
-        data-edit="galeria"
-        data-id="${esc(item.id)}">
-        ✏️ Editar publicación
-      </button>
-    </div>
+ <div class="galeriaActions">
+  <button
+    type="button"
+    class="galeriaEditarBtn"
+    data-edit="galeria"
+    data-id="${esc(item.id)}">
+    ✏️ Editar publicación
+  </button>
+
+  <button
+    type="button"
+    class="galeriaEliminarBtn"
+    data-delete-galeria="${esc(item.id)}">
+    🗑️ Eliminar publicación
+  </button>
+</div>
   ` : ''}
 </div>
 
