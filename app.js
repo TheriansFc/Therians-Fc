@@ -350,6 +350,84 @@ $('editForm').onsubmit=async e=>{
 document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>b.closest('dialog').close());document.querySelectorAll('.editAction').forEach(b=>b.onclick=()=>openEdit(b.dataset.type));document.body.addEventListener('click',e=>{const b=e.target.closest('[data-edit]');if(b)openEdit(b.dataset.edit,b.dataset.id)});
 if(online){db.auth.getSession().then(({data:s})=>{session=s.session;render()});db.auth.onAuthStateChange((_event,s)=>{session=s;render()})}load();
 
+const galeriaForm = document.getElementById('galeriaForm');
+
+if (galeriaForm) {
+  galeriaForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (!online || !canEdit()) {
+      alert('Debes iniciar sesión para publicar.');
+      return;
+    }
+
+    const msg = document.getElementById('galeriaMsg');
+    const boton = galeriaForm.querySelector('button[type="submit"]');
+    const archivo = document.getElementById('galeriaArchivo').files[0];
+    const form = new FormData(galeriaForm);
+
+    if (!archivo) return;
+
+    const tipo = form.get('tipo');
+    const esVideo = tipo === 'videos';
+
+    if (esVideo ? !['video/mp4', 'video/webm'].includes(archivo.type)
+                : !['image/jpeg', 'image/png', 'image/webp', 'image/gif'].includes(archivo.type)) {
+      msg.textContent = 'El archivo no corresponde al tipo de publicación.';
+      return;
+    }
+
+    if (archivo.size > 20 * 1024 * 1024) {
+      msg.textContent = 'El archivo no debe superar los 20 MB.';
+      return;
+    }
+
+    boton.disabled = true;
+    msg.textContent = 'Subiendo archivo...';
+
+    try {
+      const extension = archivo.name.split('.').pop().toLowerCase();
+      const nombre = `${crypto.randomUUID()}.${extension}`;
+
+      const { error: uploadError } = await db.storage
+        .from('galeria-tafc')
+        .upload(nombre, archivo, {
+          contentType: archivo.type,
+          upsert: false
+        });
+
+      if (uploadError) throw uploadError;
+
+      const { data: urlData } = db.storage
+        .from('galeria-tafc')
+        .getPublicUrl(nombre);
+
+      msg.textContent = 'Guardando publicación...';
+
+      const { error } = await db.from('galeria').insert({
+        titulo: String(form.get('titulo') || '').trim(),
+        descripcion: String(form.get('descripcion') || '').trim(),
+        tipo: tipo,
+        archivo_url: urlData.publicUrl,
+        fecha: new Date().toISOString().slice(0, 10)
+      });
+
+      if (error) throw error;
+
+      galeriaForm.reset();
+      msg.textContent = '';
+      document.getElementById('galeriaDialog').close();
+
+      await load();
+      alert('¡Publicación agregada correctamente!');
+    } catch (error) {
+      msg.textContent = 'Error al publicar: ' + error.message;
+    } finally {
+      boton.disabled = false;
+    }
+  });
+}
+
 const galeriaPublicarBtn = document.getElementById('galeriaPublicarBtn');
 
 if (galeriaPublicarBtn) {
