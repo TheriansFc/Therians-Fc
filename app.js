@@ -180,6 +180,7 @@ function openEdit(type,id){
       noticias:'noticia',
       jugadores:'jugador',
       partidos:'partido'
+      galeria:'publicación de galería'
     }[type]);
 
   $('fields').innerHTML=definitions[type]
