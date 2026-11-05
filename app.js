@@ -129,14 +129,21 @@ const definitions={
 ['fisico','Físico','number',true],
     ['foto_url','URL de fotografía','text',false]
   ],
-  partidos:[
-    ['rival','Rival','text',true],
-    ['fecha','Fecha','date',true],
-    ['lugar','Lugar','text',false],
-    ['goles_favor','Goles de Therians','number',false],
-    ['goles_contra','Goles del rival','number',false]
-  ]
+  
+partidos:[
+  ['rival','Rival','text',true],
+  ['fecha','Fecha','date',true],
+  ['lugar','Lugar','text',false],
+  ['goles_favor','Goles de Therians','number',false],
+  ['goles_contra','Goles del rival','number',false]
+],
+galeria:[
+  ['titulo','Título','text',true],
+  ['descripcion','Descripción','textarea',false],
+  ['tipo','Tipo de publicación','text',true]
+]
 };
+
 function openEdit(type,id){
   if(!online){
     alert('Primero configura Supabase.');
