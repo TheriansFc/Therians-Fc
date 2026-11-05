@@ -233,3 +233,54 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* THERIANS F.C. - VISOR DE FOTOGRAFÍAS */
+
+.galeriaFotoAmpliable {
+  cursor: zoom-in;
+  transition: transform 0.25s ease;
+}
+
+.galeriaFotoAmpliable:hover {
+  transform: scale(1.02);
+}
+
+.visorGaleria {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 99999;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  box-sizing: border-box;
+}
+
+.visorGaleria.activo {
+  display: flex;
+}
+
+.visorGaleria img {
+  max-width: 95%;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.cerrarVisor {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  background: #f391b5;
+  color: #071827;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 100000;
+}
