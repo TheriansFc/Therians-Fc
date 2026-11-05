@@ -5,7 +5,10 @@ const sample={noticias:[{id:'demo-n1',titulo:'Bienvenidos a Therians F.C.',conte
 const tables=['noticias','jugadores','partidos','galeria'];let data=structuredClone(sample),audits=[],session=null,editing=null;
 const $=id=>document.getElementById(id), esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const val=n=>Number(n||0),date=s=>s?new Date(s+'T12:00:00').toLocaleDateString('es-MX',{year:'numeric',month:'short',day:'numeric'}):'Sin fecha';
-function canEdit(){return Boolean(session?.user)}
+function canEdit(){
+  const ADMIN_UID = '698b854b-f9f3-4c54-99db-b56cad92e6c0';
+  return session?.user?.id === ADMIN_UID;
+}
 function render(){
   const galeria = data.galeria || [];
 
