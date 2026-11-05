@@ -6,7 +6,8 @@ const tables=['noticias','jugadores','partidos','galeria'];let data=structuredCl
 const $=id=>document.getElementById(id), esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const val=n=>Number(n||0),date=s=>s?new Date(s+'T12:00:00').toLocaleDateString('es-MX',{year:'numeric',month:'short',day:'numeric'}):'Sin fecha';
 function canEdit(){return Boolean(session?.user)}
-function render()const galeria = data.galeria || [];
+function render(){
+  const galeria = data.galeria || [];
 
 $('galeriaList').innerHTML = galeria.length
   ? galeria.map(item => `
@@ -25,9 +26,14 @@ $('galeriaList').innerHTML = galeria.length
         </div>
       </article>
     `).join('')
-  : `<div class="empty">
+    : `<div class="empty">
        Próximamente, los mejores momentos de Therians F.C.
-     </div>`;{const players=data.jugadores, matches=data.partidos, played=matches.filter(m=>m.goles_favor!=null&&m.goles_contra!=null),wins=played.filter(m=>val(m.goles_favor)>val(m.goles_contra)).length;
+     </div>`;
+
+  const players=data.jugadores,
+        matches=data.partidos,
+        played=matches.filter(m=>m.goles_favor!=null&&m.goles_contra!=null),
+        wins=played.filter(m=>val(m.goles_favor)>val(m.goles_contra)).length;
 $('metrics').innerHTML=[['Jugadores',players.length],['Partidos',played.length],['Victorias',wins],['Goles',played.reduce((s,m)=>s+val(m.goles_favor),0)]].map(([l,n])=>`<div class="metric"><strong>${n}</strong><span>${l}</span></div>`).join('');
 const edit=(t,id)=>canEdit()?`<button class="edit" data-edit="${t}" data-id="${esc(id)}">Editar ↗</button>`:'';
 $('newsList').innerHTML=data.noticias.length?data.noticias.map(x=>`<article class="card"><span class="tag">${date(x.fecha)}</span><h3>${esc(x.titulo)}</h3><p>${esc(x.contenido)}</p>${edit('noticias',x.id)}</article>`).join(''):'<p class="empty">Todavía no hay noticias.</p>';
