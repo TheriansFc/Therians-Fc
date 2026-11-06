@@ -236,12 +236,22 @@ function openEdit(type,id){
       }else if(kind==='textarea'){
         field=`<textarea name="${key}"
           ${required?'required':''}>${esc(value)}</textarea>`;
-      }else if(kind==='select'){
-        field=`<select name="${key}">
-          ${['Portero','Defensa','Medio','Delantero']
-            .map(v=>`<option ${v===value?'selected':''}>${v}</option>`)
-            .join('')}
-        </select>`;
+     
+}else if(kind==='select'){
+  const opciones = key === 'estado'
+    ? ['programado','finalizado']
+    : ['Portero','Defensa','Medio','Delantero'];
+
+  field=`<select name="${key}">
+    ${opciones.map(v=>`
+      <option value="${v}" ${v===value?'selected':''}>
+        ${v === 'programado' ? 'Programado'
+          : v === 'finalizado' ? 'Finalizado'
+          : v}
+      </option>
+    `).join('')}
+  </select>`;
+
       }else{
         field=`<input
           name="${key}"
