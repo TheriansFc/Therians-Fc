@@ -156,10 +156,14 @@ const definitions={
 partidos:[
   ['rival','Rival','text',true],
   ['fecha','Fecha','date',true],
+  ['hora','Hora del partido','time',false],
   ['lugar','Lugar','text',false],
+  ['estado','Estado del partido','select',true],
+  ['duracion_minutos','Duración (minutos)','number',true],
   ['goles_favor','Goles de Therians','number',false],
   ['goles_contra','Goles del rival','number',false]
 ],
+
 galeria:[
   ['titulo','Título','text',true],
   ['descripcion','Descripción','textarea',false],
