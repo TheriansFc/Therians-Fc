@@ -571,5 +571,37 @@ document.addEventListener('click', async (e) => {
     boton.disabled = false;
     boton.textContent = '🗑️ Eliminar publicación';
   }
-});      
+});
+
+  // THERIANS F.C. - Abrir y cerrar alineaciones
+  document.addEventListener('click', (evento) => {
+    const boton = evento.target.closest('.verAlineacion');
+    if (!boton) return;
+
+    const partidoId = boton.dataset.partidoId;
+    const partido = (data.partidos || []).find(
+      p => String(p.id) === String(partidoId)
+    );
+
+    if (!partido) {
+      alert('No se encontró el partido.');
+      return;
+    }
+
+    const ventana = document.getElementById('alineacionDialog');
+
+    document.getElementById('alineacionTitulo').textContent =
+      'Therians F.C. vs ' + partido.rival;
+
+    document.getElementById('alineacionMensaje').textContent =
+      'Próximamente podrás consultar y editar la alineación de este partido.';
+
+    ventana.showModal();
+  });
+
+  document.getElementById('cerrarAlineacion')
+    .addEventListener('click', () => {
+      document.getElementById('alineacionDialog').close();
+    });
+      
 })();
