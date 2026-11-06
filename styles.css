@@ -454,3 +454,28 @@
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
+
+/* JUGADORES EN CANCHA - THERIANS F.C. */
+
+#alineacionCancha .alineacionJugador {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+
+  background: #102c47;
+  border: 3px solid #f3a1b8;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+}
