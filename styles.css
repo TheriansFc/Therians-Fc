@@ -405,3 +405,52 @@
     font-size: 9px;
   }
 }
+
+/* CANCHA DE ALINEACIONES - THERIANS F.C. */
+#alineacionCancha {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 7 / 10;
+  margin: 20px auto;
+  border: 3px solid rgba(255,255,255,.85);
+  border-radius: 12px;
+  background: repeating-linear-gradient(
+    to bottom,
+    #176b49 0%,
+    #176b49 12.5%,
+    #12613f 12.5%,
+    #12613f 25%
+  );
+  box-shadow: 0 12px 35px rgba(0,0,0,.25);
+  overflow: hidden;
+}
+
+#alineacionCancha::before {
+  content: "";
+  position: absolute;
+  inset: 4%;
+  border: 2px solid rgba(255,255,255,.75);
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 49.7%,
+      rgba(255,255,255,.75) 49.7%,
+      rgba(255,255,255,.75) 50.3%,
+      transparent 50.3%
+    );
+  pointer-events: none;
+}
+
+#alineacionCancha::after {
+  content: "";
+  position: absolute;
+  width: 24%;
+  aspect-ratio: 1;
+  border: 2px solid rgba(255,255,255,.75);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
