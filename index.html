@@ -63,7 +63,27 @@
 <section id="fantasy" class="section"><div class="sectionHead"><div><span class="eyebrow">MERCADO TAFC</span><h2>Fantasy · Valor de mercado</h2></div></div><p class="muted">Valores ficticios en millones. En esta primera versión se editan manualmente desde la ficha del jugador; el mercado automático y las ligas Fantasy llegarán en una fase posterior.</p><div id="fantasyList" class="cards three"></div></section>
 <section id="historial" class="section"><div class="sectionHead"><div><span class="eyebrow">TRANSPARENCIA</span><h2>Historial de cambios</h2></div></div><div id="auditList" class="audit"></div></section></main>
 <footer><img src="assets/escudo-tafc.jpg" alt="TAFC"><div><b>THERIANS F.C.</b><p>Unidos por el fútbol 7 · 2026</p></div><span>Hecho para la comunidad TAFC</span></footer>
-<dialog id="authDialog"><form id="authForm" class="modal"><button type="button" class="close" data-close>✕</button><span class="eyebrow">CUENTA TAFC</span><h2>Entrar o registrarse</h2><p class="muted">Introduce tu correo para recibir un enlace de acceso. No necesitas contraseña.</p><label>Correo electrónico<input id="email" type="email" required placeholder="tu@correo.com"></label><button class="btn" type="submit">Enviar enlace de acceso</button><p id="authMsg" class="muted"></p></form></dialog>
+
+<!-- VENTANA DE ALINEACIONES THERIANS F.C. -->
+<dialog id="alineacionDialog">
+  <div class="modal">
+    <button type="button" class="close" id="cerrarAlineacion">×</button>
+
+    <span class="eyebrow">THERIANS F.C. · FÚTBOL 7</span>
+    <h2 id="alineacionTitulo">Alineación del partido</h2>
+
+    <p class="muted" id="alineacionMensaje">
+      Aquí aparecerá la formación de nuestros jugadores.
+    </p>
+
+    <div id="alineacionCancha"></div>
+
+    <h3>🔄 Rotaciones</h3>
+    <div id="alineacionRotaciones"></div>
+  </div>
+</dialog>
+
+  <dialog id="authDialog"><form id="authForm" class="modal"><button type="button" class="close" data-close>✕</button><span class="eyebrow">CUENTA TAFC</span><h2>Entrar o registrarse</h2><p class="muted">Introduce tu correo para recibir un enlace de acceso. No necesitas contraseña.</p><label>Correo electrónico<input id="email" type="email" required placeholder="tu@correo.com"></label><button class="btn" type="submit">Enviar enlace de acceso</button><p id="authMsg" class="muted"></p></form></dialog>
 <dialog id="editDialog"><form id="editForm" class="modal"><button type="button" class="close" data-close>✕</button><span class="eyebrow">EDITOR COLABORATIVO</span><h2 id="editTitle">Editar</h2><div id="fields"></div><button class="btn" type="submit">Guardar cambios</button><p id="editMsg" class="muted"></p></form></dialog>
 
 <!-- FORMULARIO PARA PUBLICAR EN GALERÍA -->
