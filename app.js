@@ -653,8 +653,29 @@ cancha.querySelectorAll('.alineacionJugador').forEach(circulo => {
     circulo.querySelector('span').textContent = jugador.nombre;
   };
 });
-document.getElementById('alineacionRotaciones').innerHTML =
-  '<p class="muted">Aquí aparecerán los jugadores en rotación.</p>';
+const actualizarRotaciones = () => {
+  const rotaciones = obtenerJugadoresDisponibles(null);
+
+  const contenedor = document.getElementById('alineacionRotaciones');
+
+  contenedor.innerHTML = rotaciones.length
+    ? rotaciones.map(jugador => `
+        <div class="tarjetaRotacion">
+          <img
+            src="${jugador.foto_url || ''}"
+            alt=""
+            class="fotoRotacion"
+          >
+          <div>
+            <strong>${jugador.nombre}</strong>
+            <p>#${jugador.numero} · ${jugador.posicion}</p>
+          </div>
+        </div>
+      `).join('')
+    : '<p class="muted">No hay jugadores en rotación.</p>';
+};
+
+actualizarRotaciones();
 
     ventana.showModal();
   });
