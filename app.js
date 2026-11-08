@@ -651,6 +651,7 @@ cancha.querySelectorAll('.alineacionJugador').forEach(circulo => {
 
     circulo.dataset.jugadorId = jugador.id;
     circulo.querySelector('span').textContent = jugador.nombre;
+    actualizarRotaciones();
   };
 });
 const actualizarRotaciones = () => {
