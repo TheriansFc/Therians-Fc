@@ -626,7 +626,33 @@ const obtenerJugadoresDisponibles = (circuloActual) => {
     jugador => !ocupados.includes(String(jugador.id))
   );
 };
+cancha.querySelectorAll('.alineacionJugador').forEach(circulo => {
+  circulo.onclick = () => {
+    const disponibles = obtenerJugadoresDisponibles(circulo);
 
+    const opciones = disponibles.map((jugador, i) =>
+      `${i + 1}. ${jugador.nombre} (#${jugador.numero})`
+    ).join('\n');
+
+    const seleccion = prompt(
+      'Selecciona un jugador:\n\n' + opciones
+    );
+
+    if (seleccion === null) return;
+
+    const indice = Number(seleccion) - 1;
+
+    if (!Number.isInteger(indice) || !disponibles[indice]) {
+      alert('Selecciona un número válido.');
+      return;
+    }
+
+    const jugador = disponibles[indice];
+
+    circulo.dataset.jugadorId = jugador.id;
+    circulo.querySelector('span').textContent = jugador.nombre;
+  };
+});
 document.getElementById('alineacionRotaciones').innerHTML =
   '<p class="muted">Aquí aparecerán los jugadores en rotación.</p>';
 
