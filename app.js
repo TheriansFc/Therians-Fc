@@ -596,12 +596,16 @@ document.addEventListener('click', async (e) => {
     document.getElementById('alineacionMensaje').textContent =
       'Próximamente podrás consultar y editar la alineación de este partido.';
 
+
 const cancha = document.getElementById('alineacionCancha');
 
-cancha.innerHTML = `
-  <div class="areaPorteria areaSuperior"></div>
-  <div class="areaPorteria areaInferior"></div>
-`;
+if (!cancha.querySelector('.areaPorteria')) {
+  cancha.insertAdjacentHTML('afterbegin', `
+    <div class="areaPorteria areaSuperior"></div>
+    <div class="areaPorteria areaInferior"></div>
+  `);
+}
+
 
 document.getElementById('alineacionRotaciones').innerHTML =
   '<p class="muted">Aquí aparecerán los jugadores en rotación.</p>';
