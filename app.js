@@ -616,7 +616,16 @@ if (!cancha.querySelector('.areaPorteria')) {
     <div class="areaPorteria areaInferior"></div>
   `);
 }
+const obtenerJugadoresDisponibles = (circuloActual) => {
+  const ocupados = [...cancha.querySelectorAll('.alineacionJugador')]
+    .filter(circulo => circulo !== circuloActual)
+    .map(circulo => circulo.dataset.jugadorId)
+    .filter(Boolean);
 
+  return jugadoresDisponibles.filter(
+    jugador => !ocupados.includes(String(jugador.id))
+  );
+};
 
 document.getElementById('alineacionRotaciones').innerHTML =
   '<p class="muted">Aquí aparecerán los jugadores en rotación.</p>';
