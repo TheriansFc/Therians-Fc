@@ -598,7 +598,18 @@ document.addEventListener('click', async (e) => {
 
 
 const cancha = document.getElementById('alineacionCancha');
+// Jugadores disponibles para la alineación
+const jugadoresDisponibles = data.jugadores || [];
 
+console.log(
+  'Jugadores disponibles para la alineación:',
+  jugadoresDisponibles.map(jugador => ({
+    id: jugador.id,
+    nombre: jugador.nombre,
+    numero: jugador.numero,
+    posicion: jugador.posicion
+  }))
+);
 if (!cancha.querySelector('.areaPorteria')) {
   cancha.insertAdjacentHTML('afterbegin', `
     <div class="areaPorteria areaSuperior"></div>
