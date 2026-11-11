@@ -734,9 +734,43 @@ if (titulares.length !== 7) {
     'Debes seleccionar los 7 titulares antes de guardar.';
   return;
 }
+const idsTitulares = new Set(
+  titulares.map(jugador => jugador.jugador_id)
+);
+
+const rotaciones = jugadoresDisponibles
+  .filter(jugador => !idsTitulares.has(String(jugador.id)))
+  .map(jugador => ({
+    partido_id: partido.id,
+    jugador_id: jugador.id,
+    titular: false,
+    posicion_x: null,
+    posicion_y: null,
+    minutos_jugados: 0
+  }));
+
+const alineacionCompleta = [...titulares, ...rotaciones];
+mensajeGuardarAlineacion.textContent =
+  'Guardando alineación...';
+
+const { error } = await db
+  .from('alineaciones_partido')
+  .upsert(alineacionCompleta, {
+    onConflict: 'partido_id,jugador_id'
+  });
+
+if (error) {
+  mensajeGuardarAlineacion.textContent =
+    'Error al guardar: ' + error.message;
+  return;
+}
+
+alineacionesPartido = alineacionesPartido
+  .filter(registro => String(registro.partido_id) !== String(partido.id))
+  .concat(alineacionCompleta);
 
 mensajeGuardarAlineacion.textContent =
-  'Se recopilaron correctamente los 7 titulares.';
+  'Alineación guardada correctamente.';
 };
     ventana.showModal();
   });
