@@ -718,8 +718,25 @@ botonGuardarAlineacion.onclick = async () => {
     return;
   }
 
+const titulares = [...cancha.querySelectorAll('.alineacionJugador')]
+  .filter(circulo => circulo.dataset.jugadorId)
+  .map(circulo => ({
+    partido_id: partido.id,
+    jugador_id: circulo.dataset.jugadorId,
+    titular: true,
+    posicion_x: parseFloat(circulo.style.left),
+    posicion_y: parseFloat(circulo.style.top),
+    minutos_jugados: 0
+  }));
+
+if (titulares.length !== 7) {
   mensajeGuardarAlineacion.textContent =
-    'Preparando guardado de alineación...';
+    'Debes seleccionar los 7 titulares antes de guardar.';
+  return;
+}
+
+mensajeGuardarAlineacion.textContent =
+  'Se recopilaron correctamente los 7 titulares.';
 };
     ventana.showModal();
   });
