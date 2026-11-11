@@ -599,6 +599,8 @@ document.addEventListener('click', async (e) => {
     const ventana = document.getElementById('alineacionDialog');
 const botonGuardarAlineacion = document.getElementById('guardarAlineacion');
 const mensajeGuardarAlineacion = document.getElementById('mensajeGuardarAlineacion');
+    botonGuardarAlineacion.style.display = canEdit() ? 'block' : 'none';
+mensajeGuardarAlineacion.textContent = '';
     document.getElementById('alineacionTitulo').textContent =
       'Therians F.C. vs ' + partido.rival;
 
