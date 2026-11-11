@@ -711,7 +711,16 @@ const actualizarRotaciones = () => {
 };
 
 actualizarRotaciones();
+botonGuardarAlineacion.onclick = async () => {
+  if (!canEdit()) {
+    mensajeGuardarAlineacion.textContent =
+      'Solo el administrador puede guardar alineaciones.';
+    return;
+  }
 
+  mensajeGuardarAlineacion.textContent =
+    'Preparando guardado de alineación...';
+};
     ventana.showModal();
   });
 
