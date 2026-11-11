@@ -626,6 +626,27 @@ if (!cancha.querySelector('.areaPorteria')) {
     <div class="areaPorteria areaInferior"></div>
   `);
 }
+cancha.querySelectorAll('.alineacionJugador').forEach(circulo => {
+  const posicionX = parseFloat(circulo.style.left);
+  const posicionY = parseFloat(circulo.style.top);
+
+  const registro = alineacionGuardada.find(
+    item =>
+      item.titular === true &&
+      Math.abs(Number(item.posicion_x) - posicionX) < 0.1 &&
+      Math.abs(Number(item.posicion_y) - posicionY) < 0.1
+  );
+
+  const jugador = registro
+    ? jugadoresDisponibles.find(
+        j => String(j.id) === String(registro.jugador_id)
+      )
+    : null;
+
+  circulo.dataset.jugadorId = jugador ? String(jugador.id) : '';
+  circulo.querySelector('span').textContent =
+    jugador ? jugador.nombre : circulo.dataset.posicion || '—';
+});
 const obtenerJugadoresDisponibles = (circuloActual) => {
   const ocupados = [...cancha.querySelectorAll('.alineacionJugador')]
     .filter(circulo => circulo !== circuloActual)
