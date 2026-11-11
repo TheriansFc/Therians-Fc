@@ -608,7 +608,9 @@ document.addEventListener('click', async (e) => {
 const cancha = document.getElementById('alineacionCancha');
 // Jugadores disponibles para la alineación
 const jugadoresDisponibles = data.jugadores || [];
-
+const alineacionGuardada = alineacionesPartido.filter(
+  registro => String(registro.partido_id) === String(partido.id)
+);
 console.log(
   'Jugadores disponibles para la alineación:',
   jugadoresDisponibles.map(jugador => ({
