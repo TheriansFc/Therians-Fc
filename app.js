@@ -300,7 +300,14 @@ function openEdit(type,id){
   $('editMsg').textContent='';
   $('editDialog').showModal();
 }
-async function load(){if(!online){render();return}try{const results=await Promise.all([...tables.map(t=>db.from(t).select('*').order('created_at',{ascending:false})),db.rpc('ver_historial_tafc')]);for(let i=0;i<tables.length;i++){if(results[i].error)throw results[i].error;data[tables[i]]=results[i].data||[]}if(results[4].error)throw results[4].error;audits=results[4].data||[];$('notice').textContent='Datos compartidos en línea. Para editar, inicia sesión con tu correo.'}catch(e){$('notice').textContent='No se pudieron cargar los datos compartidos: '+e.message}render()}
+async function load(){if(!online){render();return}try{const results=await Promise.all([...tables.map(t=>db.from(t).select('*').order('created_at',{ascending:false})),db.rpc('ver_historial_tafc')]);for(let i=0;i<tables.length;i++){if(results[i].error)throw results[i].error;data[tables[i]]=results[i].data||[]}if(results[4].error)throw results[4].error;audits=results[4].data||[];const { data: alineaciones, error: errorAlineaciones } =
+  await db.from('alineaciones_partido').select('*');
+
+if (errorAlineaciones) {
+  console.error('Error al cargar alineaciones:', errorAlineaciones);
+} else {
+  alineacionesPartido = alineaciones || [];
+}$('notice').textContent='Datos compartidos en línea. Para editar, inicia sesión con tu correo.'}catch(e){$('notice').textContent='No se pudieron cargar los datos compartidos: '+e.message}render()}
 $('authBtn').onclick=async()=>{if(!online){alert('Primero configura Supabase siguiendo README.md.');return}if(canEdit()){await db.auth.signOut();session=null;render()}else $('authDialog').showModal()};
 $('authForm').onsubmit=async e=>{e.preventDefault();if(!online)return;const email=$('email').value.trim();$('authMsg').textContent='Enviando...';const {error}=await db.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+location.pathname}});$('authMsg').textContent=error?error.message:'Revisa tu correo para abrir el enlace de acceso.'};
 $('editForm').onsubmit=async e=>{
