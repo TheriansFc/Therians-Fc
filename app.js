@@ -3,6 +3,7 @@ const conf=window.TAFC_CONFIG||{}, online=Boolean(conf.supabaseUrl&&conf.supabas
 const db=online?window.supabase.createClient(conf.supabaseUrl,conf.supabaseAnonKey):null;
 const sample={noticias:[{id:'demo-n1',titulo:'Bienvenidos a Therians F.C.',contenido:'Este es el nuevo hogar digital del equipo. Próximamente publicaremos noticias y actualizaciones reales.',fecha:'2026-11-03'}],jugadores:[{id:'demo-j1',nombre:'Jugador de ejemplo',numero:7,posicion:'Delantero',goles:0,asistencias:0,valor:8.5}],partidos:[]};
 const tables=['noticias','jugadores','partidos','galeria'];let data=structuredClone(sample),audits=[],session=null,editing=null;
+let alineacionesPartido = [];
 const $=id=>document.getElementById(id), esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const val=n=>Number(n||0),date=s=>s?new Date(s+'T12:00:00').toLocaleDateString('es-MX',{year:'numeric',month:'short',day:'numeric'}):'Sin fecha';
 function canEdit(){
